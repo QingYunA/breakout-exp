@@ -26,9 +26,9 @@
       "lines": 1481,
       "checklist": 25,
       "scores": {
-        "visual": 7,
+        "visual": 6,
         "feel": 7,
-        "overall": 7.5
+        "overall": 7
       },
       "screens": [
         "assets/screens/a-title.png",
@@ -37,8 +37,8 @@
         "assets/screens/a-victory.png"
       ],
       "notes": {
-        "en": "Lean, clean code (IIFE + strict). Boss fight too punishing; two text overlaps.",
-        "zh": "代码精简干净（IIFE + strict）。Boss 战惩罚过重，有两处文字重叠。"
+        "en": "Clean neon look, crisp shake and score pop-ups; two text overlaps (clear bonus, boss label under HUD).",
+        "zh": "等宽霓虹风，干净但偏朴素；震屏和飘字利落，有两处文字重叠。"
       }
     },
     {
@@ -66,9 +66,9 @@
       "lines": 2758,
       "checklist": 25,
       "scores": {
-        "visual": 9,
+        "visual": 8,
         "feel": 8,
-        "overall": 8.5
+        "overall": 8
       },
       "screens": [
         "assets/screens/b-title.png",
@@ -77,8 +77,8 @@
         "assets/screens/b-victory.png"
       ],
       "notes": {
-        "en": "Richest content: synthwave grid, 5 power-ups, combos, boss drops. Code in global scope, twice as long.",
-        "zh": "内容最丰富：合成波网格、5 种道具、连击、boss 掉道具。代码全局作用域，长度翻倍。"
+        "en": "Synthwave grid, best-polished panels, particles and boss bar; richest feedback. Boss fight on the hard side.",
+        "zh": "合成波网格，面板、粒子、血条打磨最细，反馈最饱满；boss 战偏难。"
       }
     },
     {
@@ -101,10 +101,22 @@
       "opusOutputTokens": 55330,
       "coderOutputTokens": null,
       "lines": 1250,
-      "checklist": null,
-      "scores": null,
-      "screens": [],
-      "notes": null
+      "checklist": 25,
+      "scores": {
+        "visual": 8,
+        "feel": 8,
+        "overall": 8
+      },
+      "screens": [
+        "assets/screens/c-title.png",
+        "assets/screens/c-level3.png",
+        "assets/screens/c-boss.png",
+        "assets/screens/c-victory.png"
+      ],
+      "notes": {
+        "en": "Clean sans-serif look, a boss with expressions that gets angry, combo pitch steps; smooth pacing, almost no flaws. Shortest code.",
+        "zh": "无衬线清爽风格，boss 有表情会暴怒，连击音阶上升；节奏顺畅几乎无瑕疵，代码最精简。"
+      }
     },
     {
       "id": "d",
@@ -126,10 +138,22 @@
       "opusOutputTokens": 12255,
       "coderOutputTokens": 31746,
       "lines": 1426,
-      "checklist": null,
-      "scores": null,
-      "screens": [],
-      "notes": null
+      "checklist": 25,
+      "scores": {
+        "visual": 7,
+        "feel": 7,
+        "overall": 7
+      },
+      "screens": [
+        "assets/screens/d-title.png",
+        "assets/screens/d-level3.png",
+        "assets/screens/d-boss.png",
+        "assets/screens/d-victory.png"
+      ],
+      "notes": {
+        "en": "Same level data as B (same spec). Unified synthwave look, laser and 3-phase boss; leftover balls and capsules freeze on transition screens.",
+        "zh": "和 B 组同一套关卡数据（同一份 spec）。合成波风格统一，有激光和三阶段 boss；过场画面残留冻结的球和道具。"
+      }
     },
     {
       "id": "e",
@@ -151,14 +175,30 @@
       "opusOutputTokens": 0,
       "coderOutputTokens": 43097,
       "lines": 1282,
-      "checklist": null,
-      "scores": null,
-      "screens": [],
-      "notes": null
+      "checklist": 24,
+      "scores": {
+        "visual": 9,
+        "feel": 7,
+        "overall": 7
+      },
+      "screens": [
+        "assets/screens/e-title.png",
+        "assets/screens/e-level3.png",
+        "assets/screens/e-boss.png",
+        "assets/screens/e-victory.png"
+      ],
+      "notes": {
+        "en": "Strongest UI design (sci-fi panels, buttons, sector labels), but quiet audio, only 2 power-ups, and a real bug: the ball can pass straight through the moving boss.",
+        "zh": "UI 设计感最强（科幻面板、按钮、扇区标签），但音效偏轻、只有 2 种道具，且有真实 bug：球会直接穿过移动中的 boss。"
+      }
     }
   ],
   "original": {
     "en": "Reddit original (5-level pixel platformer): Opus alone 16 min / $2.52 / 25 of 25; Opus + local Qwen 42 min / $0.62 / 24 of 25.",
     "zh": "Reddit 原帖（5 关像素平台跳跃）：Opus 单干 16 分钟 / $2.52 / 25/25；Opus + 本地 Qwen 42 分钟 / $0.62 / 24/25。"
+  },
+  "grading": {
+    "en": "All five builds were renamed P–T at random and graded by one fresh agent with one shared headless-Chrome harness and one subjective scale. Mapping: P=A, Q=D, R=B, S=C, T=E.",
+    "zh": "五份游戏随机改名为 P–T，由同一个全新代理用同一套 headless Chrome 脚本和同一把主观尺子打分。对应关系：P=A，Q=D，R=B，S=C，T=E。"
   }
 }

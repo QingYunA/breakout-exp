@@ -6,17 +6,17 @@
 
 灵感来自一篇 [Reddit 帖子](https://www.reddit.com/r/ClaudeAI/comments/1xfgyl1/same_game_built_twice_opus_alone_vs_opus_planning/)：同一个游戏做两次，Opus 单干 vs Opus 规划 + 便宜模型写码。这里做的是打砖块（需求见 `experiment/requirement.md`），用一份隐藏的 25 项检查清单（`experiment/checklist.zh.md`）评分。
 
-## 结果（当前数据）
+## 结果
 
 | 组别 | 规划 → 写码 | 耗时 | 成本（美元） | Opus 输出 | 写码输出 | 行数 | 检查清单 | 画面 / 手感 / 总评 |
 |---|---|---|---|---|---|---|---|---|
-| A Opus 5.5 单干 | Opus 5.5 medium → 同 | 6:17 | $1.82 | 37.6k | — | 1481 | 25/25 | 7 / 7 / 7.5 |
-| B Opus 写 spec + DeepSeek | Opus 5.5 medium → deepseek-flash | 27:56 | $1.13–1.30 | 12.3k | 194.5k | 2758 | 25/25 | 9 / 8 / 8.5 |
-| C Opus 5.5 high 单干 | Opus 5.5 high → 同 | 11:25 | $2.46 | 55.3k | — | 1250 | — | — |
-| D Opus 写 spec + Kimi | Opus 5.5 medium → Kimi k3.1-pro | 进行中 | — | 12.3k | — | — | — | — |
-| E Kimi 单干 | Kimi k3.1-pro → 同 | 进行中 | — | 0 | — | — | — | — |
+| A Opus 5.5 单干 | Opus 5.5 medium → 同 | 6:17 | $1.82 | 37.6k | — | 1481 | 25/25 | 6 / 7 / 7 |
+| B Opus 写 spec + DeepSeek | Opus 5.5 medium → deepseek-flash | 27:56 | $1.13–1.30 | 12.3k | 194.5k | 2758 | 25/25 | 8 / 8 / **8** |
+| C Opus 5.5 high 单干 | Opus 5.5 high → 同 | 11:25 | $2.46 | 55.3k | — | 1250 | 25/25 | 8 / 8 / **8** |
+| D Opus 写 spec + Kimi | Opus 5.5 medium → Kimi k3.1-pro | 15:57 | $1.78 | 12.3k（复用 B 组 spec） | 31.7k | 1426 | 25/25 | 7 / 7 / 7 |
+| E Kimi 单干 | Kimi k3.1-pro → 同 | 31:43 | $1.96 | 0 | 43.1k | 1282 | 24/25 | 9 / 7 / 7 |
 
-D、E 还在跑。C 已做完但尚未评分。更新于 2026-10-26。数据以 `data/results.json` 为准，网页直接读取它。
+一轮盲评：五份游戏随机改名为 P–T，由同一个全新代理用同一套 headless Chrome 脚本和同一把主观尺子打分。E 丢了第 23 项：球会直接穿过移动中的 boss。B 和 D 的关卡数据相同，因为它们用的是同一份 spec。更新于 2026-10-26。数据以 `data/results.json` 为准，网页直接读取它。
 
 ## 本地试玩
 
