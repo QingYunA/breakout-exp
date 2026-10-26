@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Same Breakout game, built 5 ways</title>
+<meta name="description" content="Same Breakout game built by 5 AI coding setups: Opus alone, Opus planning + cheaper coder, and more.">
+<style>
+:root{--bg:#0b0d14;--panel:#121624;--panel2:#171c2e;--line:#242b44;--text:#e8ecf8;--mut:#98a2c3;--acc:#7cf3c8;
+--a:#ffb547;--b:#32d6f2;--c:#b79bff;--d:#6ee27b;--e:#ff7ab8;
+--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--sans:system-ui,-apple-system,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 var(--sans);
+background-image:linear-gradient(rgba(124,243,200,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(124,243,200,.035) 1px,transparent 1px);background-size:32px 32px}
+a{color:var(--acc)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header.top{border-bottom:1px solid var(--line);background:rgba(11,13,20,.9);position:sticky;top:0;z-index:5;backdrop-filter:blur(6px)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:52px}
+.brand{font-family:var(--mono);font-weight:700;letter-spacing:.04em;color:var(--acc)}
+.lang{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.lang button{background:none;border:0;color:var(--mut);padding:5px 12px;font:600 13px var(--sans);cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--acc);color:#04130d}
+.hero{padding:56px 0 28px}
+.hero h1{font-size:clamp(30px,5.5vw,52px);line-height:1.1;margin:0 0 14px;letter-spacing:-.02em}
+.hero p{color:var(--mut);max-width:62ch;margin:0 0 20px;font-size:18px}
+.links{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:9px 16px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--text);background:var(--panel);font-weight:600;font-size:14px}
+.btn:hover{border-color:var(--acc)}
+h2{font-size:22px;margin:52px 0 16px;display:flex;align-items:center;gap:10px}
+h2::before{content:"";width:10px;height:22px;background:var(--acc);border-radius:2px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:900px;font-size:14px}
+th,td{padding:10px 8px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:12px;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:.04em;background:var(--panel2)}
+th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}
+tr:last-child td{border-bottom:0}
+td{font-family:var(--mono)}
+td.name{font-family:var(--sans);white-space:normal;min-width:190px}
+td.name .g{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:6px;font:800 13px var(--mono);color:#0b0d14;margin-right:8px;background:var(--gc)}
+td.pc{font-family:var(--sans);color:var(--mut);font-size:12px;white-space:normal;min-width:130px}
+td.best{color:var(--acc);font-weight:700;background:rgba(124,243,200,.09)}
+tr.run td{opacity:.8}
+.badge{display:inline-block;font:700 11px var(--mono);padding:2px 7px;border-radius:99px;border:1px solid #ffd166;color:#ffd166;margin-left:6px;vertical-align:middle}
+.badge::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#ffd166;margin-right:5px;animation:p 1.4s infinite}
+@keyframes p{50%{opacity:.25}}
+.note{color:var(--mut);font-size:14px;margin:12px 0 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--gc);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.shot{position:relative;aspect-ratio:16/10;background:#06080d;display:flex;align-items:center;justify-content:center;color:var(--mut);font-size:14px;overflow:hidden}
+.shot img{width:100%;height:100%;object-fit:cover;display:block;cursor:pointer}
+.thumbs{display:flex;gap:6px;padding:8px 14px 0}
+.thumbs button{padding:0;border:2px solid transparent;border-radius:4px;overflow:hidden;width:56px;height:36px;background:none;cursor:pointer;opacity:.6}
+.thumbs button[aria-current=true]{border-color:var(--gc);opacity:1}
+.thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.cb{padding:14px;display:flex;flex-direction:column;gap:10px;flex:1}
+.cb h3{margin:0;font-size:17px}
+.cb h3 .g{color:var(--gc);font-family:var(--mono);margin-right:6px}
+.pc2{font-size:13px;color:var(--mut);font-family:var(--mono)}
+.cb p{margin:0;font-size:14px;color:#c9d0ea}
+.cb p.nt{color:var(--mut)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:auto}
+.stat{background:var(--panel2);border-radius:6px;padding:7px 9px}
+.stat b{display:block;font:700 14px var(--mono);white-space:nowrap}
+.stat span{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}
+.play{display:block;text-align:center;padding:11px;border-radius:8px;background:var(--gc);color:#0b0d14;font-weight:800;text-decoration:none;font-size:16px}
+.play:hover{filter:brightness(1.12)}
+.noplay{text-align:center;padding:11px;border-radius:8px;border:1px dashed var(--line);color:var(--mut);font-size:14px}
+ul.m{padding-left:20px;margin:0;max-width:80ch}ul.m li{margin:8px 0}
+ul.raw{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+ul.raw a{display:block;padding:10px 14px;background:var(--panel);border:1px solid var(--line);border-radius:8px;font:13px var(--mono);text-decoration:none;word-break:break-all}
+ul.raw a:hover{border-color:var(--acc)}
+main{padding-bottom:20px}
+footer{margin:48px 0 40px;padding-top:20px;border-top:1px solid var(--line);color:var(--mut);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.err{padding:20px;border:1px solid #ff6b6b;border-radius:8px;color:#ff9b9b}
+@media(max-width:600px){.hero{padding-top:36px}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<span class="brand">BREAKOUT-EXP</span>
+<div class="lang" role="group" aria-label="Language"><button data-l="en" aria-pressed="false">EN</button><button data-l="zh" aria-pressed="false">中文</button></div>
+</div></header>
+<main class="wrap">
+<section class="hero">
+<h1 data-t="title"></h1>
+<p data-t="sub"></p>
+<div class="links"><a class="btn" id="lReddit" target="_blank" rel="noopener" data-t="reddit"></a><a class="btn" id="lRepo" target="_blank" rel="noopener" data-t="repo"></a></div>
+</section>
+<h2 data-t="hResults"></h2>
+<div class="tablewrap"><table id="tbl"></table></div>
+<p class="note" id="orig"></p>
+<p class="note" data-t="bestNote"></p>
+<h2 data-t="hCards"></h2>
+<div class="grid" id="cards"></div>
+<h2 data-t="hMethod"></h2>
+<ul class="m" id="method"></ul>
+<h2 data-t="hRaw"></h2>
+<ul class="raw" id="raw"></ul>
+<div id="err"></div>
+</main>
+<footer class="wrap"><span data-t="built"></span><span id="upd"></span></footer>
+<script>
+(function(){
+var I18N={
+en:{title:"Same Breakout game, built 5 ways",sub:"One requirement, five AI coding setups, one hidden 25-item checklist. Which setup is faster, cheaper, better?",reddit:"Reddit inspiration",repo:"GitHub repo",
+hResults:"Results",hCards:"The games",hMethod:"Method",hRaw:"Raw materials",
+bestNote:"Highlighted cell = best value in that column among finished groups. One run per group, so treat small gaps as noise.",
+group:"Group",pc:"Planner → Coder",time:"Time",cost:"Cost (USD)",otok:"Opus out",ctok:"Coder out",loc:"Lines",chk:"Checklist",subj:"Visual / Feel / Overall",
+running:"running",play:"Play ▶",noplay:"Not playable yet",nogame:"Not ready yet",setup:"Setup",min:"min",built:"Built by QingYunA",updated:"Updated ",
+m:["Every group got the same requirement text (experiment/requirement.md), no extra hints.","Each group ran in a fresh, isolated session, so no group saw another group's work.","The 25-item checklist was written and frozen before any game was graded.","Grading was blind: files were renamed so the grader did not know which model made which game.","Costs are API list-price equivalents computed from session transcripts by experiment/stats.py, not real bills.","One run per group. Results are noisy; do not read them as a ranking of the models."]},
+zh:{title:"同一个打砖块，五种做法",sub:"同一份需求，五种 AI 编程组合，一份隐藏的 25 项检查清单。谁更快、更省、更好？",reddit:"Reddit 原帖",repo:"GitHub 仓库",
+hResults:"结果",hCards:"游戏",hMethod:"方法",hRaw:"原始材料",
+bestNote:"高亮单元格 = 已完成组别中该列的最优值。每组只跑一次，差距小时请当作噪声。",
+group:"组别",pc:"规划 → 写码",time:"耗时",cost:"成本（美元）",otok:"Opus 输出",ctok:"写码输出",loc:"代码行数",chk:"检查清单",subj:"画面 / 手感 / 总评",
+running:"进行中",play:"试玩 ▶",noplay:"暂不可玩",nogame:"暂无截图",setup:"做法",min:"分钟",built:"Built by QingYunA",updated:"更新于 ",
+m:["每组拿到完全相同的需求文本（experiment/requirement.md），没有额外提示。","每组都在全新的隔离会话里运行，互相看不到对方的成果。","25 项检查清单在评分前写好并冻结。","盲评：文件改名后再打分，评分者不知道哪个游戏出自哪个模型。","成本是按 API 标价折算的等价金额，由 experiment/stats.py 从会话记录算出，不是真实账单。","每组只跑了一次，结果有噪声，不要当成模型排名。"]}
+};
+var RAW=["experiment/requirement.md","experiment/checklist.zh.md","experiment/b-opus-deepseek/spec.md","experiment/b-opus-deepseek/dsh-prompt.md","experiment/b-opus-deepseek/dsh.ndjson.gz","experiment/stats.py"];
+var COL={a:"var(--a)",b:"var(--b)",c:"var(--c)",d:"var(--d)",e:"var(--e)"};
+var lang=(function(){try{var s=localStorage.getItem("lang");if(s==="zh"||s==="en")return s}catch(e){}return /^zh/i.test(navigator.language||"")?"zh":"en"})();
+var DATA=null,shotIdx={};
+function t(k){return I18N[lang][k]}
+function el(tag,cls,txt){var n=document.createElement(tag);if(cls)n.className=cls;if(txt!=null)n.textContent=txt;return n}
+function loc(o){return o?(o[lang]||o.en||""):""}
+var D="—";
+function fmtTime(s){if(s==null)return D;return Math.floor(s/60)+":"+String(Math.round(s%60)).padStart(2,"0")+" "+t("min")}
+function fmtCost(g){if(g.costRange)return"$"+g.costRange[0].toFixed(2)+"–"+g.costRange[1].toFixed(2);return g.costUSD==null?D:"$"+g.costUSD.toFixed(2)}
+function fmtK(n){return n==null?D:(n===0?"0":(n/1000).toFixed(1)+"k")}
+function fmtN(n){return n==null?D:n.toLocaleString("en-US")}
+function fmtChk(g){return g.checklist==null?D:g.checklist+"/"+DATA.checklistTotal}
+function fmtSubj(g){return g.scores?[g.scores.visual,g.scores.feel,g.scores.overall].join(" / "):D}
+function best(vals,mode){var f=vals.filter(function(v){return v!=null});if(!f.length)return null;return mode==="min"?Math.min.apply(null,f):Math.max.apply(null,f)}
+function badge(g){return g.status==="running"?el("span","badge",t("running")):null}
+function renderTable(){
+var tb=document.getElementById("tbl");tb.textContent="";
+var gs=DATA.groups,done=gs.filter(function(g){return g.status!=="running"});
+var cols=[
+{h:"group"},{h:"pc"},
+{h:"time",v:function(g){return g.seconds},f:function(g){return fmtTime(g.seconds)},m:"min"},
+{h:"cost",v:function(g){return g.costUSD},f:fmtCost,m:"min"},
+{h:"otok",f:function(g){return fmtK(g.opusOutputTokens)}},
+{h:"ctok",f:function(g){return fmtK(g.coderOutputTokens)}},
+{h:"loc",f:function(g){return fmtN(g.lines)}},
+{h:"chk",v:function(g){return g.checklist},f:fmtChk,m:"max"},
+{h:"subj",v:function(g){return g.scores&&g.scores.overall},f:fmtSubj,m:"max"}];
+var tr=el("tr");cols.forEach(function(c){tr.appendChild(el("th",null,t(c.h)))});tb.appendChild(el("thead")).appendChild(tr);
+var body=el("tbody");
+var bests=cols.map(function(c){return c.m?best(done.map(c.v),c.m):null});
+gs.forEach(function(g){
+var r=el("tr",g.status==="running"?"run":"");r.style.setProperty("--gc",COL[g.id]);
+var n=el("td","name");n.appendChild(el("span","g",g.id.toUpperCase()));n.appendChild(document.createTextNode(loc(g.label)));var b=badge(g);if(b)n.appendChild(b);r.appendChild(n);
+r.appendChild(el("td","pc",g.planner+" → "+g.coder));
+cols.slice(2).forEach(function(c,i){var td=el("td",null,c.f(g));var v=c.v&&c.v(g);if(c.m&&v!=null&&g.status!=="running"&&v===bests[i+2])td.className="best";r.appendChild(td)});
+body.appendChild(r)});
+tb.appendChild(body)}
+function setShot(g,i){shotIdx[g.id]=i;renderCards()}
+function renderCards(){
+var box=document.getElementById("cards");box.textContent="";
+DATA.groups.forEach(function(g){
+var c=el("article","card");c.style.setProperty("--gc",COL[g.id]);
+var sh=el("div","shot");var sc=g.screens||[];
+if(sc.length){var i=shotIdx[g.id]||0;var im=el("img");im.src=sc[i];im.alt=loc(g.label)+" "+(i+1)+"/"+sc.length;im.loading="lazy";im.onclick=function(){setShot(g,(i+1)%sc.length)};sh.appendChild(im)}
+else sh.textContent=g.status==="running"?t("running"):t("nogame");
+c.appendChild(sh);
+if(sc.length>1){var th=el("div","thumbs");sc.forEach(function(s,j){var bt=el("button");bt.type="button";bt.setAttribute("aria-label",String(j+1));if(j===(shotIdx[g.id]||0))bt.setAttribute("aria-current","true");var ti=el("img");ti.src=s;ti.alt="";bt.appendChild(ti);bt.onclick=function(){setShot(g,j)};th.appendChild(bt)});c.appendChild(th)}
+var cb=el("div","cb");var h=el("h3");h.appendChild(el("span","g",g.id.toUpperCase()));h.appendChild(document.createTextNode(loc(g.label)));var bd=badge(g);if(bd)h.appendChild(bd);cb.appendChild(h);
+cb.appendChild(el("div","pc2",g.planner+" → "+g.coder));
+cb.appendChild(el("p",null,loc(g.setup)));
+if(g.notes)cb.appendChild(el("p","nt",loc(g.notes)));
+var st=el("div","stats");
+[[fmtTime(g.seconds),t("time")],[fmtCost(g),t("cost")],[fmtChk(g),t("chk")]].forEach(function(x){var s=el("div","stat");s.appendChild(el("b",null,x[0]));s.appendChild(el("span",null,x[1]));st.appendChild(s)});
+cb.appendChild(st);
+if(g.play){var a=el("a","play",t("play"));a.href=g.play;cb.appendChild(a)}else cb.appendChild(el("div","noplay",t("noplay")));
+c.appendChild(cb);box.appendChild(c)})}
+function renderStatic(){
+document.documentElement.lang=lang==="zh"?"zh-CN":"en";
+document.title=t("title");
+document.querySelectorAll("[data-t]").forEach(function(n){n.textContent=t(n.getAttribute("data-t"))});
+document.querySelectorAll(".lang button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.l===lang))});
+var m=document.getElementById("method");m.textContent="";t("m").forEach(function(s){m.appendChild(el("li",null,s))});
+var r=document.getElementById("raw");r.textContent="";RAW.forEach(function(p){var li=el("li");var a=el("a",null,p);a.href=p;li.appendChild(a);r.appendChild(li)});
+if(DATA){document.getElementById("lReddit").href=DATA.inspiration;document.getElementById("lRepo").href=DATA.repo;
+document.getElementById("orig").textContent=loc(DATA.original);
+document.getElementById("upd").textContent=t("updated")+DATA.updated;
+renderTable();renderCards()}}
+document.querySelectorAll(".lang button").forEach(function(b){b.onclick=function(){lang=b.dataset.l;try{localStorage.setItem("lang",lang)}catch(e){}renderStatic()}});
+renderStatic();
+fetch("data/results.json").then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(j){DATA=j;renderStatic()}).catch(function(e){var d=document.getElementById("err");d.className="err";d.textContent="Failed to load data/results.json: "+e.message});
+})();
+</script>
+</body>
+</html>

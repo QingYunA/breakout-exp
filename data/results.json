@@ -1,0 +1,164 @@
+{
+  "updated": "2026-10-26",
+  "inspiration": "https://www.reddit.com/r/ClaudeAI/comments/1xfgyl1/same_game_built_twice_opus_alone_vs_opus_planning/",
+  "repo": "https://github.com/QingYunA/breakout-exp",
+  "checklistTotal": 25,
+  "groups": [
+    {
+      "id": "a",
+      "label": {
+        "en": "Opus 5.5 alone",
+        "zh": "Opus 5.5 单干"
+      },
+      "setup": {
+        "en": "Opus 5.5 (effort medium) plans, codes, tests and iterates by itself.",
+        "zh": "Opus 5.5（effort medium）自己规划、写码、测试、迭代。"
+      },
+      "planner": "Opus 5.5 medium",
+      "coder": "Opus 5.5 medium",
+      "status": "done",
+      "play": "play/a-opus/",
+      "seconds": 377,
+      "costUSD": 1.82,
+      "costRange": null,
+      "opusOutputTokens": 37632,
+      "coderOutputTokens": null,
+      "lines": 1481,
+      "checklist": 25,
+      "scores": {
+        "visual": 7,
+        "feel": 7,
+        "overall": 7.5
+      },
+      "screens": [
+        "assets/screens/a-title.png",
+        "assets/screens/a-level3.png",
+        "assets/screens/a-boss.png",
+        "assets/screens/a-victory.png"
+      ],
+      "notes": {
+        "en": "Lean, clean code (IIFE + strict). Boss fight too punishing; two text overlaps.",
+        "zh": "代码精简干净（IIFE + strict）。Boss 战惩罚过重，有两处文字重叠。"
+      }
+    },
+    {
+      "id": "b",
+      "label": {
+        "en": "Opus spec + DeepSeek",
+        "zh": "Opus 写 spec + DeepSeek 写码"
+      },
+      "setup": {
+        "en": "Opus 5.5 writes a 271-line spec only. DeepSeek (deepseek-flash, via DeepSeek Harness) implements it in one run. Opus never reviews.",
+        "zh": "Opus 5.5 只写 271 行 spec，DeepSeek（deepseek-flash，经 DeepSeek Harness）一次跑完实现，Opus 不 review。"
+      },
+      "planner": "Opus 5.5 medium",
+      "coder": "deepseek-flash",
+      "status": "done",
+      "play": "play/b-opus-deepseek/",
+      "seconds": 1676,
+      "costUSD": 1.22,
+      "costRange": [
+        1.13,
+        1.3
+      ],
+      "opusOutputTokens": 12255,
+      "coderOutputTokens": 194478,
+      "lines": 2758,
+      "checklist": 25,
+      "scores": {
+        "visual": 9,
+        "feel": 8,
+        "overall": 8.5
+      },
+      "screens": [
+        "assets/screens/b-title.png",
+        "assets/screens/b-level3.png",
+        "assets/screens/b-boss.png",
+        "assets/screens/b-victory.png"
+      ],
+      "notes": {
+        "en": "Richest content: synthwave grid, 5 power-ups, combos, boss drops. Code in global scope, twice as long.",
+        "zh": "内容最丰富：合成波网格、5 种道具、连击、boss 掉道具。代码全局作用域，长度翻倍。"
+      }
+    },
+    {
+      "id": "c",
+      "label": {
+        "en": "Opus 5.5 high alone",
+        "zh": "Opus 5.5 high 单干"
+      },
+      "setup": {
+        "en": "Same as A, with effort raised to high.",
+        "zh": "和 A 组相同，effort 调到 high。"
+      },
+      "planner": "Opus 5.5 high",
+      "coder": "Opus 5.5 high",
+      "status": "done",
+      "play": "play/c-opus-high/",
+      "seconds": 685,
+      "costUSD": 2.46,
+      "costRange": null,
+      "opusOutputTokens": 55330,
+      "coderOutputTokens": null,
+      "lines": 1250,
+      "checklist": null,
+      "scores": null,
+      "screens": [],
+      "notes": null
+    },
+    {
+      "id": "d",
+      "label": {
+        "en": "Opus spec + Kimi",
+        "zh": "Opus 写 spec + Kimi 写码"
+      },
+      "setup": {
+        "en": "The exact spec from group B, handed to Kimi k3.1-pro (Kimi Code CLI). Only the coder changes. Cost includes the reused Opus spec ($0.97) plus Kimi ($0.81).",
+        "zh": "直接用 B 组那份 spec，交给 Kimi k3.1-pro（Kimi Code CLI），只换写码模型。成本含复用的 Opus spec（$0.97）和 Kimi（$0.81）。"
+      },
+      "planner": "Opus 5.5 medium",
+      "coder": "Kimi k3.1-pro",
+      "status": "done",
+      "play": "play/d-opus-kimi/",
+      "seconds": 957,
+      "costUSD": 1.78,
+      "costRange": null,
+      "opusOutputTokens": 12255,
+      "coderOutputTokens": 31746,
+      "lines": 1426,
+      "checklist": null,
+      "scores": null,
+      "screens": [],
+      "notes": null
+    },
+    {
+      "id": "e",
+      "label": {
+        "en": "Kimi alone",
+        "zh": "Kimi 单干"
+      },
+      "setup": {
+        "en": "Kimi k3.1-pro gets only the requirement and works like group A.",
+        "zh": "Kimi k3.1-pro 只拿到需求原文，和 A 组一样独立完成。"
+      },
+      "planner": "Kimi k3.1-pro",
+      "coder": "Kimi k3.1-pro",
+      "status": "running",
+      "play": null,
+      "seconds": null,
+      "costUSD": null,
+      "costRange": null,
+      "opusOutputTokens": 0,
+      "coderOutputTokens": null,
+      "lines": null,
+      "checklist": null,
+      "scores": null,
+      "screens": [],
+      "notes": null
+    }
+  ],
+  "original": {
+    "en": "Reddit original (5-level pixel platformer): Opus alone 16 min / $2.52 / 25 of 25; Opus + local Qwen 42 min / $0.62 / 24 of 25.",
+    "zh": "Reddit 原帖（5 关像素平台跳跃）：Opus 单干 16 分钟 / $2.52 / 25/25；Opus + 本地 Qwen 42 分钟 / $0.62 / 24/25。"
+  }
+}
