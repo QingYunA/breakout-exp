@@ -15,7 +15,7 @@ hRes1:"Every number,",hRes2:"side by side",
 bestNote:"Highlighted value = best in that column among finished groups. One run per group, so treat small gaps as noise.",
 group:"Group",pc:"Planner → Coder",time:"Time",cost:"Cost (USD)",otok:"Opus out",ctok:"Coder out",loc:"Lines",chk:"Checklist",subj:"Visual / Feel / Overall",
 visual:"Visual",feel:"Feel",overall:"Overall",
-running:"running",play:"Play",noplay:"Not playable yet",nogame:"No screenshots yet",inCab:"Load in cabinet",min:"min",lines:"lines",
+running:"running",play:"Play",noplay:"Not playable yet",nogame:"No screenshots yet",inCab:"Load in cabinet",more:"More",sMin:"Minutes",sCost:"Cost",min:"min",lines:"lines",
 hMethod:"How it was run",hGrade:"Grading",hOrig:"The Reddit original",
 fGroups:"Groups",fItems:"Checklist items",fRuns:"Runs per group",fGraders:"Blind graders",
 hRaw:"Raw materials",rawLead:"Everything needed to rerun or check the experiment.",
@@ -37,7 +37,7 @@ hRes1:"所有数字，",hRes2:"一张表",
 bestNote:"高亮数值 = 已完成组别中该列的最优值。每组只跑一次，差距小时请当作噪声。",
 group:"组别",pc:"规划 → 写码",time:"耗时",cost:"成本（美元）",otok:"Opus 输出",ctok:"写码输出",loc:"代码行数",chk:"检查清单",subj:"画面 / 手感 / 总评",
 visual:"画面",feel:"手感",overall:"总评",
-running:"进行中",play:"试玩",noplay:"暂不可玩",nogame:"暂无截图",inCab:"放进上方街机",min:"分钟",lines:"行",
+running:"进行中",play:"试玩",noplay:"暂不可玩",nogame:"暂无截图",inCab:"放进上方街机",more:"更多",sMin:"分钟",sCost:"成本",min:"分钟",lines:"行",
 hMethod:"怎么跑的",hGrade:"评分方式",hOrig:"Reddit 原帖数据",
 fGroups:"组别",fItems:"清单项",fRuns:"每组运行次数",fGraders:"盲评者",
 hRaw:"原始材料",rawLead:"重跑或核对这个实验所需的全部材料。",
@@ -62,6 +62,7 @@ function loc(o){return o?(o[lang]||o.en||""):""}
 function G(g){return(g.id||"?").toUpperCase()}
 function chip(g){return el("span","chip",G(g))}
 function fmtTime(s){if(s==null)return D;return Math.floor(s/60)+":"+("0"+Math.round(s%60)).slice(-2)+" "+t("min")}
+function fmtClock(s){if(s==null)return D;return Math.floor(s/60)+":"+("0"+Math.round(s%60)).slice(-2)}
 function fmtCost(g){if(g.costRange)return"$"+g.costRange[0].toFixed(2)+"–"+g.costRange[1].toFixed(2);return g.costUSD==null?D:"$"+g.costUSD.toFixed(2)}
 function fmtK(n){return n==null?D:(n===0?"0":(n/1000).toFixed(1)+"k")}
 function fmtN(n){return n==null?D:n.toLocaleString("en-US")}
@@ -189,10 +190,12 @@ else c.appendChild(el("div","shot",g.status==="running"?t("running"):t("nogame")
 var st=el("div","strip");
 var h=el("h3");h.appendChild(chip(g));h.appendChild(document.createTextNode(loc(g.label)));var bd=badge(g);if(bd)h.appendChild(bd);st.appendChild(h);
 if(g.planner||g.coder)st.appendChild(el("div","pc2",(g.planner||D)+" → "+(g.coder||D)));
-st.appendChild(vals("",[[fmtTime(g.seconds),t("time")],[fmtCost(g),t("cost")],[fmtN(g.lines),t("lines")],[fmtChk(g),t("chk")]]));
-if(g.scores)st.appendChild(vals(" v3",[[String(g.scores.visual),t("visual")],[String(g.scores.feel),t("feel")],[String(g.scores.overall),t("overall")]]));
-if(g.setup)st.appendChild(el("p",null,loc(g.setup)));
+st.appendChild(vals("",[[fmtClock(g.seconds),t("sMin")],[fmtCost(g),t("sCost")],[fmtChk(g),t("chk")]].concat(g.scores?[[String(g.scores.overall),t("overall")]]:[])));
 if(g.notes)st.appendChild(el("p",null,loc(g.notes)));
+if(g.setup||g.scores){var dt=el("details","more");dt.appendChild(el("summary",null,t("more")));
+if(g.setup)dt.appendChild(el("p",null,loc(g.setup)));
+dt.appendChild(vals("",[[fmtN(g.lines),t("loc")]].concat(g.scores?[[String(g.scores.visual),t("visual")],[String(g.scores.feel),t("feel")]]:[])));
+st.appendChild(dt)}
 if(sc.length>1){var th=el("div","thumbs");sc.forEach(function(s,j){var bt=el("button");bt.type="button";bt.setAttribute("aria-label",G(g)+" "+(j+1)+"/"+sc.length);var ti=el("img");ti.src=s;ti.alt="";ti.decoding="async";ti.setAttribute("fetchpriority","low");ti.width=64;ti.height=42;bt.appendChild(ti);bt.onclick=function(){showShot(g,j,c)};th.appendChild(bt)});st.appendChild(th)}
 var bb=el("div","cbtns");
 if(g.play){var a=el("a","play",t("play"));a.href=g.play;bb.appendChild(a);

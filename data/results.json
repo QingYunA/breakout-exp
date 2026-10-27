@@ -31,10 +31,10 @@
         "overall": 7
       },
       "screens": [
-        "assets/screens/a-title.png",
-        "assets/screens/a-level3.png",
-        "assets/screens/a-boss.png",
-        "assets/screens/a-victory.png"
+        "assets/screens/a-title.webp",
+        "assets/screens/a-level3.webp",
+        "assets/screens/a-boss.webp",
+        "assets/screens/a-victory.webp"
       ],
       "notes": {
         "en": "Clean neon look, crisp shake and score pop-ups; two text overlaps (clear bonus, boss label under HUD).",
@@ -71,10 +71,10 @@
         "overall": 8
       },
       "screens": [
-        "assets/screens/b-title.png",
-        "assets/screens/b-level3.png",
-        "assets/screens/b-boss.png",
-        "assets/screens/b-victory.png"
+        "assets/screens/b-title.webp",
+        "assets/screens/b-level3.webp",
+        "assets/screens/b-boss.webp",
+        "assets/screens/b-victory.webp"
       ],
       "notes": {
         "en": "Synthwave grid, best-polished panels, particles and boss bar; richest feedback. Boss fight on the hard side.",
@@ -108,10 +108,10 @@
         "overall": 8
       },
       "screens": [
-        "assets/screens/c-title.png",
-        "assets/screens/c-level3.png",
-        "assets/screens/c-boss.png",
-        "assets/screens/c-victory.png"
+        "assets/screens/c-title.webp",
+        "assets/screens/c-level3.webp",
+        "assets/screens/c-boss.webp",
+        "assets/screens/c-victory.webp"
       ],
       "notes": {
         "en": "Clean sans-serif look, a boss with expressions that gets angry, combo pitch steps; smooth pacing, almost no flaws. Shortest code.",
@@ -145,10 +145,10 @@
         "overall": 7
       },
       "screens": [
-        "assets/screens/d-title.png",
-        "assets/screens/d-level3.png",
-        "assets/screens/d-boss.png",
-        "assets/screens/d-victory.png"
+        "assets/screens/d-title.webp",
+        "assets/screens/d-level3.webp",
+        "assets/screens/d-boss.webp",
+        "assets/screens/d-victory.webp"
       ],
       "notes": {
         "en": "Same level data as B (same spec). Unified synthwave look, laser and 3-phase boss; leftover balls and capsules freeze on transition screens.",
@@ -182,10 +182,10 @@
         "overall": 7
       },
       "screens": [
-        "assets/screens/e-title.png",
-        "assets/screens/e-level3.png",
-        "assets/screens/e-boss.png",
-        "assets/screens/e-victory.png"
+        "assets/screens/e-title.webp",
+        "assets/screens/e-level3.webp",
+        "assets/screens/e-boss.webp",
+        "assets/screens/e-victory.webp"
       ],
       "notes": {
         "en": "Strongest UI design (sci-fi panels, buttons, sector labels), but quiet audio, only 2 power-ups, and a real bug: the ball can pass straight through the moving boss.",
